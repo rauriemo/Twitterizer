@@ -49,17 +49,21 @@
     
     
     NSString *input = self.textView.text;
-    NSArray *wordArray = [input componentsSeparatedByString:@" "];
+    NSMutableArray *wordArray = [input componentsSeparatedByString:@" "];
+    
     
     for (int i = 0; i < wordArray.count; i++) {
-        if (i % 2 == 0) {
-            [wordArray   [NSString stringWithFormat:@"#%@", wordArray[i]];
+        if (i % 2 == 0 && ![[[wordArray objectAtIndex:i]  substringToIndex: 1] isEqualToString: @"#"]) {
+            [wordArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"#%@", wordArray[i]]];
+            
         }
     }
     
     
     
     
+    NSString *output = [wordArray componentsJoinedByString:@" "];
+    self.textView.text = output;
     
     
     
