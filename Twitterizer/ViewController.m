@@ -8,7 +8,10 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *charLenLabel;
 
 @end
 
@@ -16,12 +19,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.textView.delegate = self; // set UITextView delegate as current VC
+    self.charLenLabel.text = [NSString stringWithFormat:@"%lu", self.textView.text.length];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark LOGIC
+- (IBAction)twitterizeButton:(UIButton *)sender {
+    NSString *inputString = self.textView.text;
+    NSCharacterSet *vowelCharSet = [NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"];
+    
+    NSMutableString *mutableString = [NSMutableString new];
+    for (int i = 0; i < inputString.length; i++) {
+        char charAtIndex = [inputString characterAtIndex:i];
+        if (![vowelCharSet characterIsMember:charAtIndex]) {
+            [mutableString appendString:[NSString stringWithFormat:@"%c", charAtIndex]];
+        }
+    }
+    
+    self.textView.text =mutableString; 
 }
+
+#pragma mark DELEGATE METHODS
+- (void)textViewDidChangeSelection:(UITextView *)textView{
+    self.charLenLabel.text = [NSString stringWithFormat:@"%lu", self.textView.text.length];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+}
+
 
 @end
