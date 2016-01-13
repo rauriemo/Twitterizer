@@ -41,16 +41,36 @@
 
 #pragma mark DELEGATE METHODS
 - (void)textViewDidChangeSelection:(UITextView *)textView{
+    
+    
+  
+    NSString *text = self.textView.text;
+        NSRange limit = {0, 140};
+    
+    if (self.textView.text.length > 140) {
+       
+        
+        self.textView.text = [text substringWithRange: limit];
+        
+        
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            self.view.backgroundColor =  [UIColor redColor];
+        }];
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            self.view.backgroundColor =  [UIColor whiteColor];
+        }];
+        
+    }
+//    else if (self.textView.text.length < 140) {
+//        self.view.backgroundColor = [UIColor whiteColor];
+//    }
     self.charLenLabel.text = [NSString stringWithFormat:@"%lu", self.textView.text.length];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    
-}
 
-- (void)textViewDidChange:(UITextView *)textView {
-    
-}
+
 
 
 @end
