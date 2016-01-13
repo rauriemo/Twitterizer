@@ -43,10 +43,6 @@
 
 - (IBAction)hashtaggerButton:(id)sender {
     
-
-    
-    
-    
     
     NSString *input = self.textView.text;
     NSMutableArray *wordArray = [input componentsSeparatedByString:@" "];
@@ -60,37 +56,36 @@
     }
     
     
-    
-    
     NSString *output = [wordArray componentsJoinedByString:@" "];
     self.textView.text = output;
     
+}
+
+- (IBAction)reverseButton:(id)sender {
+    
+    NSString *input = self.textView.text;
+    NSMutableArray *wordArray = [input componentsSeparatedByString:@" "];
+    NSString *currentWord = [NSString new];
     
     
-    
-    
-    
-    
-//    NSMutableString *individualWord = [NSMutableString new];
-//    NSMutableArray *wordArray = [NSMutableArray new];
-//    
-//    
-//    NSString *input = self.textView.text;
-//    NSCharacterSet *emptySpace = [NSCharacterSet characterSetWithCharactersInString:@" "];
-//    
-//    for (int i = 0; i < self.textView.text.length; i++) {
-//        if ([emptySpace characterIsMember:[ input characterAtIndex: i]]) {
-//            [wordArray addObject:individualWord];
-//            individualWord = [NSMutableString ];
-//        } else {
-//            [individualWord appendString: [NSString stringWithFormat:@"%c", [input characterAtIndex:i]]];
-//        }
-//    }
-    
-    
-    
+    for (int i = 0; i < wordArray.count; i++) {
+        if (i % 2 != 0) {
+            NSMutableString *changedWord = [NSMutableString new];
+            currentWord = wordArray[i];
+            for (int x = currentWord.length; x>0; x-- ) {
+                [changedWord appendString:[NSString stringWithFormat:@"%c", [currentWord characterAtIndex:x-1]]];
+            }
+            [wordArray replaceObjectAtIndex:i withObject:changedWord];
+        }
+    }
+
+    NSString *output = [wordArray componentsJoinedByString:@" "];
+    self.textView.text = output;
+
     
 }
+
+
 
 #pragma mark DELEGATE METHODS
 - (void)textViewDidChangeSelection:(UITextView *)textView{
