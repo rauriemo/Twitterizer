@@ -39,6 +39,55 @@
     self.textView.text =mutableString; 
 }
 
+
+
+- (IBAction)hashtaggerButton:(id)sender {
+    
+
+    
+    
+    
+    
+    NSString *input = self.textView.text;
+    NSArray *wordArray = [input componentsSeparatedByString:@" "];
+    
+    for (int i = 0; i < wordArray.count; i++) {
+        if (i % 2 == 0) {
+            [wordArray   [NSString stringWithFormat:@"#%@", wordArray[i]];
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    NSMutableString *individualWord = [NSMutableString new];
+//    NSMutableArray *wordArray = [NSMutableArray new];
+//    
+//    
+//    NSString *input = self.textView.text;
+//    NSCharacterSet *emptySpace = [NSCharacterSet characterSetWithCharactersInString:@" "];
+//    
+//    for (int i = 0; i < self.textView.text.length; i++) {
+//        if ([emptySpace characterIsMember:[ input characterAtIndex: i]]) {
+//            [wordArray addObject:individualWord];
+//            individualWord = [NSMutableString ];
+//        } else {
+//            [individualWord appendString: [NSString stringWithFormat:@"%c", [input characterAtIndex:i]]];
+//        }
+//    }
+    
+    
+    
+    
+}
+
 #pragma mark DELEGATE METHODS
 - (void)textViewDidChangeSelection:(UITextView *)textView{
     
